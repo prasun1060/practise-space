@@ -4,7 +4,7 @@ from marshmallow import fields, Schema
 
 class CartItemSchema(Schema):
 
-    user_id = fields.Str(required=True, load_only=True)
+    user_id = fields.Str(required=True, dump_only=True)
     item_id = fields.Int(required=True, load_only=True)
     item = fields.Nested(PlainItemSchema(), dump_only=True)
     quantity = fields.Int(required=True)

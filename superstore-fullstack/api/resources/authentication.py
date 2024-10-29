@@ -12,8 +12,9 @@ class UserAuthenticationResource(Resource):
     def post(self):
 
         user_data = user_authentication_schema.load(request.get_json())
-
+        print(user_data)
         user = UserModel.query.get(user_data["id"])
+        print(user.id)
 
         if user and check_password_hash(user.password, user_data["password"]):
             access_token = create_access_token(user_data["id"])

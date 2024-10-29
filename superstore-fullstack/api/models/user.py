@@ -10,4 +10,4 @@ class UserModel(db.Model):
     email_id = db.Column(db.String(40), unique=True, nullable=False)
     password = db.Column(db.String, nullable=False)
     
-    cart_items = db.relationship('CartModel', back_populates='user', lazy="dynamic")
+    cart_items = db.relationship('CartModel', back_populates='user', lazy="dynamic", cascade="all, delete")

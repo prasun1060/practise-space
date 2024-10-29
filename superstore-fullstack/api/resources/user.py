@@ -4,10 +4,10 @@ from schemas import user_schema, cart_item_schema, user_cart_schema
 from flask_restful import Resource, request, abort
 from sqlalchemy.exc import SQLAlchemyError
 from werkzeug.security import generate_password_hash
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 
-class UserRegisterResource(Resource):
+class UserResource(Resource):
 
     def post(self):
 
@@ -22,24 +22,47 @@ class UserRegisterResource(Resource):
             abort(500, message=str(e))
 
         return user_schema.dump(user), 201
+    
+    @jwt_required()
+    def get(self):
 
-class UserCartItemsResource(Resource):
+        user_id = get_jwt_identity()
+
+        user = UserModel.query.get(user_id)
+        if user:
+
+            return user_cart_schema.dump(user), 200
+
+        else:
+
+            abort(404, message="User not found")
 
     @jwt_required()
-    def get(self, user_id: str):
+    def delete(self):
 
-        user = UserModel.query.get_or_404(user_id)
-        
-        return user_cart_schema.dump(user), 200
+        user_id = get_jwt_identity()
+
+        user = UserModel.query.get(user_id)
+        if user:
+            
+            db.session.delete(user)
+            db.session.commit()
+
+            return {"message": "User successfully deleted"}, 200
+
+        else:
+
+            abort(404, message="User not found")
     
 class UserCartAddItemResource(Resource):
 
     @jwt_required()
     def post(self):
 
+        user_id = get_jwt_identity()
         cart_item_data = cart_item_schema.load(request.get_json())
 
-        cart = CartModel(**cart_item_data)
+        cart = CartModel(**cart_item_data, user_id=user_id)
 
         db.session.add(cart)
         db.session.commit()

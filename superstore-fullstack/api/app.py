@@ -21,7 +21,7 @@ api = Api(app=app)
 
 from resources.store import Store, StoreList, StorePostResource
 from resources.item import ItemResource, ItemListResource, ItemPostResouce
-from resources.user import UserRegisterResource, UserCartItemsResource, UserCartAddItemResource
+from resources.user import UserResource, UserCartAddItemResource
 from resources.authentication import UserAuthenticationResource
 
 api.add_resource(UserAuthenticationResource, '/authenticate/', methods=['POST'])
@@ -34,8 +34,7 @@ api.add_resource(ItemResource, '/item/<int:item_id>', methods=['GET', 'DELETE'])
 api.add_resource(ItemListResource, '/item/items', methods=['GET'])
 api.add_resource(ItemPostResouce, '/item/add', methods=['POST'])
 
-api.add_resource(UserRegisterResource, '/user/register', methods=['POST'])
-api.add_resource(UserCartItemsResource, '/user/<string:user_id>/cart', methods=['GET'])
+api.add_resource(UserResource, '/user/', methods=['POST', 'DELETE', 'GET'])
 api.add_resource(UserCartAddItemResource, '/user/add_item', methods=['POST'])
 
 
