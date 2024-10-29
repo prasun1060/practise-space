@@ -1,6 +1,7 @@
 version: '3'
 services:
   api:
+    container_name: api
     build:
       context: api/
       dockerfile: Dockerfile
@@ -31,3 +32,17 @@ services:
       timeout: 10s
       retries: 10
       start_period: 10s
+  frontend-dev:
+    container_name: frontend-dev
+    build:
+      context: frontend/
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./frontend:/frontend
+      - /frontend/node_modules
+    depends_on:
+      - api
+    links:
+      - api
