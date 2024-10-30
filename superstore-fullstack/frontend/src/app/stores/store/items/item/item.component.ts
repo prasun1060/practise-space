@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { NgFor } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-item',
@@ -9,14 +10,12 @@ import { Component } from '@angular/core';
 })
 export class ItemComponent {
 
-  public item: {id: number, name: string, price: number} = {
-    id: 1,
-    name: "Item 1",
-    price: 30.0
-  }
+  @Input({required: true}) public item!: {id: number, name: string, price: number};
+  @Output() public selectedItemForCart = new EventEmitter<{id: number, name: string, price: number}>()
 
-  onAddToCart () {
-    console.log(`Item with id ${this.item.id} added to cart!`)
+  public onAddToCart () {
+    console.log(`Item with id ${this.item.id} added to cart!`);
+    this.selectedItemForCart.emit(this.item);
   }
 
 }
