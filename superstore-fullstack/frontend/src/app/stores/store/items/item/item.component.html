@@ -1,0 +1,8 @@
+<div class="card flex-shrink-0 w-150 me-2 product" [id]="item.id">
+    <img src="https://via.placeholder.com/150" class="card-img-top img-fluid" alt="Product Image">
+    <div class="card-body text-center">
+        <h5 class="card-title mb-1">{{item.name}}</h5>
+        <p class="text-primary mb-2">Price - <strong>${{item.price}}</strong></p>
+        <a type="button" class="btn btn-primary w-100" (click)="onAddToCart()">Add to Cart</a>
+    </div>
+</div>
