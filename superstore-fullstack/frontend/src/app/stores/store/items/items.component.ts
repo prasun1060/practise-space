@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ItemComponent } from './item/item.component';
 import { NgFor } from '@angular/common';
 
@@ -11,25 +11,7 @@ import { NgFor } from '@angular/common';
 })
 export class ItemsComponent {
 
-  public items: { id: number, name: string, price: number }[] = [
-    {
-      id: 1,
-      name: "Item 1",
-      price: 30.0
-    },
-    {
-      id: 2,
-      name: "Item 2",
-      price: 30.0
-    },
-    {
-      id: 3,
-      name: "Item 3",
-      price: 30.0
-    }
-  ]
-
-  item = this.items[0]
+  @Input({required: true}) items!: { id: number, name: string, price: number }[]
 
   public onAddToCart (item: { id: number, name: string, price: number }) {
     console.log(`Item with id ${item.id} added to cart!`);

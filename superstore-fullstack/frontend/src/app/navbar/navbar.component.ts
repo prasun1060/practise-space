@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -9,4 +9,7 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 
+  @Input({required: true}) isUserLoggedIn!: Boolean;
+  @Input({required: false}) noOfCartItems: number = 0;
+  
 }

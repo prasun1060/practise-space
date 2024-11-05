@@ -1,7 +1,7 @@
 <div class="container-fluid p-2 mt-2">
-    <h4>Store Name</h4>
+    <h4>{{store.name}}</h4>
     <hr>
     <div>
-        <app-items></app-items>
+        <app-items [items]="store.items"></app-items>
     </div>
 </div>

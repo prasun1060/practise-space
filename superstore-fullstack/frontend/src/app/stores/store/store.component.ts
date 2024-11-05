@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ItemsComponent } from './items/items.component';
 
 @Component({
@@ -9,5 +9,7 @@ import { ItemsComponent } from './items/items.component';
   styleUrl: './store.component.css'
 })
 export class StoreComponent {
+
+  @Input({required: true}) store!: {id: number, name: string, items: {id: number, name: string, price: number}[]}
 
 }

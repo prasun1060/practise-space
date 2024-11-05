@@ -11,11 +11,16 @@
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
+                    <a class="nav-link" href="#">Cart ({{noOfCartItems}})</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Register</a>
-                </li>
+                @if (!isUserLoggedIn) {
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Register</a>
+                    </li>
+                }
             </ul>
         </div>
     </div>
